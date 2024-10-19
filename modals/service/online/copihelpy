@@ -1,0 +1,1752 @@
+import bpy
+import rigify
+from mathutils import Matrix, Vector
+
+bpy.ops.object.mode_set(mode="OBJECT")
+bpy.ops.object.select_all(action='DESELECT')
+
+arm.select_set(True)
+bpy.context.view_layer.objects.active = arm
+
+EXTERNAL_RIG_NAME = ""
+RIGIFY_NAME = "_rigify"
+
+# ===========================================================
+
+def delete_garbage():
+    for block in bpy.data.brushes:
+        block.use_fake_user = False
+        if block.users == 0:
+            bpy.data.brushes.remove(block)
+
+    for block in bpy.data.objects:
+        if block.users == 0:
+            bpy.data.objects.remove(block)
+
+    for block in bpy.data.actions:
+        if block.use_fake_user == False:
+            bpy.data.actions.remove(block)
+
+    for block in bpy.data.armatures:
+        block.use_fake_user = False
+        if block.users == 0:
+            bpy.data.armatures.remove(block)
+
+    for block in bpy.data.meshes:
+        if block.users == 0:
+            bpy.data.meshes.remove(block)
+
+    for block in bpy.data.materials:
+        if block.users == 0:
+            bpy.data.materials.remove(block)
+
+
+# ===========================================================
+
+
+def get_all_bone_names(obj, mode="EDIT"):
+    current_mode = bpy.context.object.mode
+    bone_name_list = []
+    if mode == "EDIT":
+        bpy.ops.object.mode_set(mode="EDIT")
+        bone_name_list = [bones.name for bones in obj.data.edit_bones]
+    if mode == "POSE":
+        bpy.ops.object.mode_set(mode="POSE")
+        bone_name_list = [bones.name for bones in obj.pose.bones]
+    bpy.ops.object.mode_set(mode=current_mode)
+    return bone_name_list
+
+
+# ===========================================================
+
+
+def make_bone(
+    obj,
+    bone_name,
+    bone_parent=None,
+    head=(0.0, 0.0, 0.0),
+    tail=(0.5, 0.0, 0.0),
+):
+    """creates new bone
+    Args:
+                                                                                                                                    obj  (str)                       : name of the object to have the new bone
+                                                                                                                                    bone_name (str)                       : name of the new bone
+                                                                                                                                    bone_parent  (str, optional)             : name of the parent bone. Defaults to "none".
+                                                                                                                                    x_head, y_head, z_head (float, optional): position of bone head on x axis . Defaults to 0.
+                                                                                                                                    x_tail, y_tail, z_tail (float, optional): position of bone tail on x axis . Defaults to 0.5 or 0
+    """
+    obArm = bpy.context.active_object  # get the armature object
+    ebs = obArm.data.edit_bones
+    newBone = ebs.new(bone_name)
+    newBone.head = head
+    newBone.tail = tail
+    if bone_parent != None:
+        newBone.parent = ebs[bone_parent]
+
+# ===========================================================
+
+
+def get_avarage(bone_List, head_tail="tail"):
+    """get avarage of palms coordinates for hand.R/L"""
+    x_avg, y_avg, z_avg = 0, 0, 0
+    cnt = 0
+    for bone in bone_List:
+        if head_tail == "tail":
+            head = bone.tail
+        else:
+            head = bone.head
+        x_avg, y_avg, z_avg = x_avg + head.x, y_avg + head.y, z_avg + head.z
+        cnt += 1
+
+    x_avg, y_avg, z_avg = x_avg / cnt, y_avg / cnt, z_avg / cnt
+    return x_avg, y_avg, z_avg
+
+
+# ===========================================================
+
+
+def get_rotation_diff(bone1, bone1Obj, bone2, bone2Obj):
+    """gets difference in rotation of 2 bones"""
+
+    # print(f"\t {bone1Obj.name} [{bone1}]")
+    # print(f"\t {bone2Obj.name} [{bone2}]")
+
+    # first_bone = bone1Obj.pose.bones[bone1]
+    first_bone_rig_matrix = bone1Obj.matrix_world
+
+    first_bone_matrix = first_bone_rig_matrix @ bone1.matrix
+    first_bone_rot_quat_matrix = first_bone_matrix.to_quaternion()
+
+    # second_bone = bone2Obj.pose.bones[bone2]
+    second_rig_matrix = bone2Obj.matrix_world
+
+    second_bone_matrix = second_rig_matrix @ bone2.matrix
+    second_bone_rot_quat_matrix = second_bone_matrix.to_quaternion()
+
+    return first_bone_rot_quat_matrix, second_bone_rot_quat_matrix
+
+
+# ===========================================================
+
+# get difference of bones to further delete from maps
+def get_bones_key(lst_to_compare, bone_list, toDelete=False):
+    key_lst = []
+    for value in lst_to_compare:
+        if value not in bone_list:
+            key_lst.append(value)
+    return key_lst
+
+
+# ===========================================================
+
+
+def get_keyframes(anim):
+    """used to get first frame and last frame of the animation"""
+    keyframes = []
+    if anim is not None and anim.action is not None:
+        for fcu in anim.action.fcurves:
+            for keyframe in fcu.keyframe_points:
+                x, y = keyframe.co
+                if x not in keyframes:
+                    keyframes.append((math.ceil(x)))
+    return keyframes
+
+
+# ===========================================================
+
+
+def renme_current_anim(obj):
+    """renames animation so that it would be easier to find it in Dope Sheet"""
+    action = obj.animation_data.action
+    new_action_name = (
+        EXTERNAL_RIG_NAME +
+        obj.name.replace(EXTERNAL_RIG_NAME, "") + "_Animation"
+    )
+    # for a in bpy.data.actions:
+    #     print(a.name)
+    #     if new_action_name == a.name:
+    #         print("same Name", new_action_name)
+    #         bpy.data.actions.remove(bpy.data.actions[name])
+    action.name = new_action_name
+
+    return action
+
+
+# ===========================================================
+
+
+def get_constrain_name(bone, parent_obj):
+    """get name of current constraint"""
+    bone_constrtaint = parent_obj.pose.bones[bone]
+    constraint_list = bone_constrtaint.constraints.keys()
+    return constraint_list[len(constraint_list) - 1]
+
+
+infl = 0.45  # to put different influence to chest
+
+# ===========================================================
+
+
+def create_constraint(
+    bone_to_get_constr,
+    parent_obj,
+    target_bone,
+    target_bone_obj,
+    rotation,
+    rot_order="XYZ",
+    copy_loc=False,
+    copy_scale=False,
+    transf_space="WORLD",
+):
+    """Creates constraints for bones
+
+    Args:
+        bone_to_get_constr (pose.bone): bone that will have the constraint
+        parent_obj (string): name of object that has the bone to get constraint
+        target_bone (string): name of the target bone from whitch constraints will be taken
+        target_bone_obj (string): name of object that contains target bone
+        rotation (euler): rotation on x,y,z  axis
+        rot_order (str, optional): Rotation order of TRANSFORM constraint. Defaults to "XYZ".
+    """
+    # print(f"bone_to_get_constr {bone_to_get_constr.name}")
+    # print(f"parent_obj        {parent_obj} ")
+    # print(f"target_bone        {target_bone} ")
+    # print(f"target_bone_obj   {target_bone_obj} ")
+    # print(f"copy_loc   {copy_loc}")
+    # print("")
+
+    bone_to_get_constr.constraints.new("COPY_ROTATION")
+    constr_name = get_constrain_name(bone_to_get_constr.name, parent_obj)
+    rot_constr = bone_to_get_constr.constraints[constr_name]
+
+    if ".0" not in rot_constr.name:
+        rot_constr.target = target_bone_obj
+        rot_constr.subtarget = target_bone
+
+        # adds influence
+        if "chest" in bone_to_get_constr.name and parent_obj == RIGIFY_NAME:
+            global infl
+            # .55+.45 = 1 for first time, next time infl = 0
+            rot_constr.influence = 0.55 + infl
+            infl = 0
+            c = parent_obj.pose.bones["chest"].bone
+            bpy.context.object.data.bones.active = c
+            # else:
+            # deletes prior Transformation Constraint for chest
+            for c in bpy.context.selected_pose_bones:
+                for constr in c.constraints:
+                    if "Transformation" in constr.name:
+                        c.constraints.remove(constr)
+
+        # to clean up bone constrain tab
+        rot_constr.show_expanded = False
+    else:
+        # delete created constraints cuz it already exists
+        bone_to_get_constr.constraints.remove(rot_constr)
+
+    # ===========================================================
+    # transform
+    bone_to_get_constr.constraints.new("TRANSFORM")
+    constr_name = get_constrain_name(bone_to_get_constr.name, parent_obj)
+    tran_constr = bone_to_get_constr.constraints[constr_name]
+
+    if ".0" not in tran_constr.name:
+        tran_constr.target = parent_obj
+
+        if parent_obj.name == RIGIFY_NAME:
+            tran_constr.subtarget = "root"
+        else:
+            tran_constr.subtarget = "skeleton:TransformationTarget"
+        tran_constr.map_from = "ROTATION"
+        tran_constr.map_to = "ROTATION"
+
+        tran_constr.to_euler_order = rot_order
+
+        (
+            tran_constr.to_min_x_rot,
+            tran_constr.to_min_y_rot,
+            tran_constr.to_min_z_rot,
+        ) = rotation
+
+        tran_constr.owner_space = transf_space
+        tran_constr.mix_mode_rot = "AFTER"
+
+        # to clean up bone constrain tab
+        tran_constr.show_expanded = False
+    else:
+        # delete created constraints cuz it already exists
+        bone_to_get_constr.constraints.remove(tran_constr)
+
+    # ===========================================================
+    # copy location
+    if copy_scale == True:
+
+        # print(f"{bone_to_get_constr} ==> {target_bone}")
+        bone_to_get_constr.constraints.new("COPY_LOCATION")
+        # bone_to_get_constr.constraints.new("COPY_SCALE")
+        constr_name = get_constrain_name(bone_to_get_constr.name, parent_obj)
+        scale_constr = bone_to_get_constr.constraints[constr_name]
+        if ".0" not in scale_constr.name:
+            scale_constr.target = bpy.data.objects[target_bone_obj.name]
+            scale_constr.subtarget = target_bone
+            # scale_constr.owner_space = 'POSE'
+            # scale_constr.target_space = 'POSE'
+
+            scale_constr.show_expanded = False  # to clean up bone constrain tab
+        else:
+            # delete created constraints cuz it already exists
+            bone_to_get_constr.constraints.remove(scale_constr)
+
+    # ===========================================================
+    # copy location
+    if copy_loc == True:
+        # print(f"{bone_to_get_constr} ==> {target_bone}")
+        bone_to_get_constr.constraints.new("COPY_LOCATION")
+        constr_name = get_constrain_name(bone_to_get_constr.name, parent_obj)
+        loc_constr = bone_to_get_constr.constraints[constr_name]
+        if ".0" not in loc_constr.name:
+            loc_constr.target = bpy.data.objects[target_bone_obj.name]
+            loc_constr.subtarget = target_bone
+            loc_constr.show_expanded = False  # to clean up bone constrain tab
+        else:
+            # delete created constraints cuz it already exists
+            bone_to_get_constr.constraints.remove(loc_constr)
+
+
+# ======================================================================
+def get_bone_location(bone_list, obj):
+    """stores bones head and tail vectors"""
+    bone_head_tail_loc = {}
+    for bone in bone_list:
+        metarig_bone = obj.data.edit_bones[bone]
+        obj_matrix = obj.matrix_world
+
+        bone_world_head = obj_matrix @ metarig_bone.head
+        bone_world_tail = obj_matrix @ metarig_bone.tail
+
+        metarig_bone.head = bone_world_head
+        old_head = bone_world_head.copy()
+        old_tail = bone_world_tail.copy()
+        bone_head_tail_loc[metarig_bone] = [
+            old_head, old_tail, metarig_bone.length]
+    return bone_head_tail_loc
+
+
+# ======================================================================
+all_bones_between = []
+
+
+def get_bones_between(starting_bone, ending_bone, sub_str_to_look_for=None):
+    for c in starting_bone.children:
+        # if sub_str_to_look_for in c.name:
+        all_bones_between.append(c.name)
+        if c != ending_bone:
+            get_bones_between(c, ending_bone)
+    return all_bones_between
+
+
+def clean_bones_between():
+    # clean up all_bones_between so that previous bones in list would be deleted
+    global all_bones_between
+    all_bones_between = []
+
+# ======================================================================
+# ======================================================================
+# ======================================================================
+
+
+def the_script(skeleton_model, parameters):
+    # set 3d cursor to (0,0,0)
+    bpy.context.scene.cursor.location = (0, 0, 0)
+
+    # clean up all_bones_between so that previous bones in list would be deleted
+    clean_bones_between()
+
+    global RIGIFY_NAME
+    # reset RIGIFY_NAME in case it already has value
+    RIGIFY_NAME = "_rigify"
+
+    head = "cf_j_head"
+    first_neck = "cf_j_neck"
+    last_neck = ""
+
+    first_spine = "cf_j_hips"
+    last_spine = "cf_j_spine03"
+
+    clav_r = "cf_j_shoulder_R"
+    clav_l = "cf_j_shoulder_L"
+    uparm_l = "cf_j_arm00_L"
+    uparm_r = "cf_j_arm00_R"
+    lowarm_l = "cf_j_forearm01_L"
+    lowarm_r = "cf_j_forearm01_R"
+    hand_l = "cf_j_hand_L"
+    hand_r = "cf_j_hand_R"
+
+    palm_pinky_r = ""
+    pinky_01_r = "cf_j_little01_R"
+    pinky_02_r = "cf_j_little02_R"
+    pinky_03_r = "cf_j_little03_R"
+    palm_ring_r = ""
+    ring_01_r = "cf_j_ring01_R"
+    ring_02_r = "cf_j_ring02_R"
+    ring_03_r = "cf_j_ring03_R"
+    palm_middle_r = ""
+    middle_01_r = "cf_j_middle01_R"
+    middle_02_r = "cf_j_middle02_R"
+    middle_03_r = "cf_j_middle03_R"
+    palm_index_r = ""
+    index_01_r = "cf_j_index01_R"
+    index_02_r = "cf_j_index02_R"
+    index_03_r = "cf_j_index03_R"
+    thumb_01_r = "cf_j_thumb01_R"
+    thumb_02_r = "cf_j_thumb02_R"
+    thumb_03_r = "cf_j_thumb03_R"
+    palm_pinky_l = ""
+    pinky_01_l = "cf_j_little01_L"
+    pinky_02_l = "cf_j_little02_L"
+    pinky_03_l = "cf_j_little03_L"
+    palm_ring_l = ""
+    ring_01_l = "cf_j_ring01_L"
+    ring_02_l = "cf_j_ring02_L"
+    ring_03_l = "cf_j_ring03_L"
+    palm_middle_l = ""
+    middle_01_l = "cf_j_middle01_L"
+    middle_02_l = "cf_j_middle02_L"
+    middle_03_l = "cf_j_middle03_L"
+    palm_index_l = ""
+    index_01_l = "cf_j_index01_L"
+    index_02_l = "cf_j_index02_L"
+    index_03_l = "cf_j_index03_L"
+    thumb_01_l = "cf_j_thumb01_L"
+    thumb_02_l = "cf_j_thumb02_L"
+    thumb_03_l = "cf_j_thumb03_L"
+
+    thigh_l = "cf_j_thigh00_L"
+    thigh_r = "cf_j_thigh00_R"
+    calf_l = "cf_j_leg01_L"
+    calf_r = "cf_j_leg01_R"
+    foot_l = "cf_j_foot_L"
+    foot_r = "cf_j_foot_R"
+    toe_l = "cf_j_toes_L"
+    toe_r = "cf_j_toes_R"
+    heel_l = ""
+    heel_r = ""
+
+    fingers_bool_r = "fingers_bool_r"
+    fingers_bool_l = "fingers_bool_l"
+    copy_loc_constr = "copy_loc_constr"
+
+    # ===============================================================
+    # delete value for fingers if the checkbox is off
+    right_fingers = [palm_pinky_r, pinky_01_r, pinky_02_r, pinky_03_r, palm_ring_r, ring_01_r, ring_02_r, ring_03_r, palm_middle_r,
+                     middle_01_r, middle_02_r, middle_03_r, palm_index_r, index_01_r, index_02_r, index_03_r, thumb_01_r, thumb_02_r, thumb_03_r]
+    left_fingers = [palm_pinky_l, pinky_01_l, pinky_02_l, pinky_03_l, palm_ring_l, ring_01_l, ring_02_l, ring_03_l, palm_middle_l,
+                    middle_01_l, middle_02_l, middle_03_l, palm_index_l, index_01_l, index_02_l, index_03_l, thumb_01_l, thumb_02_l, thumb_03_l]
+    excluded_bones_to_create = []
+    if fingers_bool_r == False:
+        # add bones to excluded_bones_to_create to bypass them when creating metarig
+        for f in right_fingers:
+            excluded_bones_to_create.append(f)
+        palm_pinky_r = ""
+        pinky_01_r = ""
+        pinky_02_r = ""
+        pinky_03_r = ""
+        palm_ring_r = ""
+        ring_01_r = ""
+        ring_02_r = ""
+        ring_03_r = ""
+        palm_middle_r = ""
+        middle_01_r = ""
+        middle_02_r = ""
+        middle_03_r = ""
+        palm_index_r = ""
+        index_01_r = ""
+        index_02_r = ""
+        index_03_r = ""
+        thumb_01_r = ""
+        thumb_02_r = ""
+        thumb_03_r = ""
+        right_fingers = []
+
+    if fingers_bool_l == False:
+        # add bones to excluded_bones_to_create to bypass them when creating metarig
+        for f in left_fingers:
+            excluded_bones_to_create.append(f)
+        palm_pinky_l = ""
+        pinky_01_l = ""
+        pinky_02_l = ""
+        pinky_03_l = ""
+        palm_ring_l = ""
+        ring_01_l = ""
+        ring_02_l = ""
+        ring_03_l = ""
+        palm_middle_l = ""
+        middle_01_l = ""
+        middle_02_l = ""
+        middle_03_l = ""
+        palm_index_l = ""
+        index_01_l = ""
+        index_02_l = ""
+        index_03_l = ""
+        thumb_01_l = ""
+        thumb_02_l = ""
+        thumb_03_l = ""
+        left_fingers = []
+
+    # ===============================================================
+
+    # bpy.ops.object.mode_set(mode="OBJECT")
+    # skeleton_model = bpy.context.active_object
+    EXTERNAL_RIG_NAME = skeleton_model.name
+    EXTERNAL_RIG_OBJ = bpy.data.objects[EXTERNAL_RIG_NAME]
+
+    # ===============================================================
+    # get all spines
+    EXTERNAL_RIG_OBJ.select_set(True)
+    bpy.ops.object.mode_set(mode="EDIT")
+    all_ext_rig_bone_names = get_all_bone_names(EXTERNAL_RIG_OBJ)
+
+    last_spine_bool = True
+    if last_spine == "":
+        last_spine_bool = False
+        last_spine = first_spine
+
+    last_spine_bone = EXTERNAL_RIG_OBJ.data.edit_bones[last_spine]
+
+    # get all last spines parenst recursively
+    all_spines = [i.name for i in last_spine_bone.parent_recursive]
+
+    # add last spine to list of all spines
+    all_spines = [last_spine] + all_spines
+
+    # slice spine list till first spine
+    all_spines = all_spines[0:all_spines.index(first_spine)+1]
+
+    # remove duplicates
+    all_spines = list(dict.fromkeys(all_spines))
+
+    # set second_spine because, used in torso bone loc and in use case where 1st_spine.head == 2nd_spine.head
+    first_spine_bone = EXTERNAL_RIG_OBJ.data.edit_bones[first_spine]
+    if last_spine_bool == True:
+        second_spine = [
+            i.name for i in first_spine_bone.children if i.name in all_spines][0]
+    else:
+        second_spine = first_spine
+
+    # add to parameters dict so these bones are created in metarig
+    new_spines = (
+        list(set(all_spines) - set([first_spine, last_spine])))
+
+    # adding spine bones to parameters
+    for i in new_spines:
+        temp = f"new_{i}"
+        temp = i
+
+    # make parenting dict for spines
+    spine_parenting = {}
+    for i in all_spines:
+        spine_bone = EXTERNAL_RIG_OBJ.data.edit_bones[i]
+        for c in spine_bone.children:
+            if c.name in all_spines:
+                # child: [parent, use_connect]
+                spine_parenting[c.name] = [spine_bone.name, True]
+
+    less_spine_bones = True if len(all_spines) <= 2 else False
+
+    # ===============================================================
+    # get neck bones
+    # clean up all_bones_between so that previous bones in list would be deleted
+    clean_bones_between()
+
+    all_necks = []
+    neck_parenting = {}
+    if last_neck != "":
+        last_neck = first_neck
+        first_neck_bone = EXTERNAL_RIG_OBJ.data.edit_bones[first_neck]
+        last_neck_bone = EXTERNAL_RIG_OBJ.data.edit_bones[last_neck]
+
+        # get all neck bones
+        all_necks = get_bones_between(first_neck_bone, last_neck_bone)
+        all_necks.extend([first_neck, last_neck])
+
+        # remove duplicates
+        all_necks = list(dict.fromkeys(all_necks))
+
+        # add to parameters dict so these bones are created in metarig
+        new_necks = (
+            list(set(all_necks) - set([first_neck, last_neck])))
+
+        for i in new_necks:
+            temp = f"new_{i}"
+            parameters[temp] = i
+
+        # make parenting dict for neck bones
+        for i in all_necks:
+            neck_bone = EXTERNAL_RIG_OBJ.data.edit_bones[i]
+            for c in neck_bone.children:
+                if c.name in all_necks:
+                    # child: [parent, use_connect]
+                    neck_parenting[c.name] = [neck_bone.name, True]
+
+        if first_neck_bone == last_neck_bone or first_neck_bone == "":
+            all_necks = [first_neck]
+            neck_parenting = {}
+    else:
+        # add the only neck to list and dir
+        all_necks = [first_neck]
+        neck_parenting[first_neck] = [last_spine, False]
+        last_neck = first_neck
+
+    # ===============================================================
+    # make new bones for skeleton_model
+    bpy.ops.object.mode_set(mode="EDIT")
+    make_bone(EXTERNAL_RIG_OBJ, "skeleton:TransformationTarget")
+    all_ext_rig_bone_names = get_all_bone_names(EXTERNAL_RIG_OBJ)
+
+    # make new bones for skeleton_model and place it properly
+    transf_target_coord_1 = EXTERNAL_RIG_OBJ.data.edit_bones[first_spine].head
+    transf_target_coord_2 = EXTERNAL_RIG_OBJ.data.edit_bones[second_spine].head
+
+    if transf_target_coord_2 == transf_target_coord_1:
+        transf_target_coord_2 = EXTERNAL_RIG_OBJ.data.edit_bones[second_spine].tail
+
+    x = (transf_target_coord_1.x + transf_target_coord_2.x) / 2
+    y = (transf_target_coord_1.y + transf_target_coord_2.y) / 2
+    z = (transf_target_coord_1.z + transf_target_coord_2.z) / 2
+
+    hip_tail = EXTERNAL_RIG_OBJ.data.edit_bones[second_spine].tail
+
+    make_bone(
+        EXTERNAL_RIG_OBJ,
+        "skeleton:torso_bone",
+        first_spine,
+        (x, y, z),
+        (hip_tail.x, hip_tail.y, hip_tail.z),
+    )
+
+    bpy.ops.object.mode_set(mode="POSE")
+    pose_bone = bpy.context.object.pose.bones["skeleton:torso_bone"]
+    pose_bone.rigify_type = "spines.basic_spine"
+    pose_bone.rigify_parameters.pivot_pos = 1
+
+    # ===============================================================
+    # set inherit_scale = 'NONE' if stretch is on
+    if copy_loc_constr == True:
+        for bone in EXTERNAL_RIG_OBJ.data.edit_bones:
+            bone.inherit_scale = 'NONE'
+
+    # ===============================================================
+    # adding human (metarig)
+    print("\n\t Adding human (metarig)")
+
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.armature_human_metarig_add()
+    so = bpy.context.active_object
+
+    METARIG_NAME = f"{EXTERNAL_RIG_NAME}_metarig"
+    so.name = METARIG_NAME
+    METARIG_OBJ = bpy.data.objects[METARIG_NAME]
+
+    # ===============================================================
+    # delete bones
+    EXTERNAL_RIG_OBJ.select_set(True)
+    METARIG_OBJ.select_set(True)
+    bpy.ops.object.mode_set(mode="EDIT")
+
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+
+    # deletes bones
+    print("\n\t Removing extra bones from Metarig")
+    for i in all_metarig_bone_names:
+        bone = METARIG_OBJ.data.edit_bones[i]
+        METARIG_OBJ.data.edit_bones.remove(bone)
+
+    # ===============================================================
+    # create bones in metarig
+    all_ext_rig_bone_names = get_all_bone_names(EXTERNAL_RIG_OBJ)
+
+    for bone in all_ext_rig_bone_names:
+        # if bone in parameters.values():
+        if bone not in excluded_bones_to_create:
+            ft_bone = EXTERNAL_RIG_OBJ.data.edit_bones[bone]
+            bone_world_head = EXTERNAL_RIG_OBJ.matrix_world @ ft_bone.head
+            bone_world_tail = EXTERNAL_RIG_OBJ.matrix_world @ ft_bone.tail
+            h_x, h_y, h_z = bone_world_head.x, bone_world_head.y, bone_world_head.z
+            t_x, t_y, t_z = bone_world_tail.x, bone_world_tail.y, bone_world_tail.z
+            # h_x, h_y, h_z = (ft_bone.head.x, ft_bone.head.y, ft_bone.head.z)
+            # t_x, t_y, t_z = (ft_bone.tail.x,ft_bone.tail.y,ft_bone.tail.z)
+            make_bone(METARIG_OBJ, bone, None,
+                      (h_x, h_y, h_z), (t_x, t_y, t_z))
+
+    # ===============================================================
+    # add bones
+    make_bone(METARIG_OBJ, "new_torso")
+
+    # add heels if thare are no
+    if heel_r == "" and heel_l == "":
+        heels = {
+            "heel_r": foot_r,
+            "heel_l": foot_l,
+        }
+
+        # assign bone to var
+        heel_r = "heel_r"
+        heel_l = "heel_l"
+
+        all_matarig_bone_names = get_all_bone_names(METARIG_OBJ)
+        for heel, heel_parent in heels.items():
+            if heel not in all_matarig_bone_names:
+                make_bone(METARIG_OBJ, heel)
+
+                new_heel = METARIG_OBJ.data.edit_bones[heel]
+                heel_parent = METARIG_OBJ.data.edit_bones[heel_parent]
+
+                # place heels
+                new_heel.parent = heel_parent
+                new_heel.tail = heel_parent.head
+                new_heel.tail.z = (heel_parent.head.z - 0) / 2
+                delta = 1 if heel_parent.head.x > 0 else -1
+                new_heel.tail.x += (heel_parent.length/2)*delta
+
+                new_heel.head = new_heel.tail
+                new_heel.head.x -= (heel_parent.length)*delta
+
+    # # ===============================================================
+    # parent bones, parent bone.tail to child.head, asign use_connect
+    parenting_bones = {
+        # child: [parent, use_connect]
+        head: [last_neck, True],
+        first_neck: [last_spine, False],
+
+        # spine_004: [spine_003, True],
+        # spine_003: [spine_002, True],
+        # spine_002: [spine_001, True],
+        second_spine: [first_spine, True],
+
+        thigh_l: [first_spine, False],
+        thigh_r: [first_spine, False],
+        calf_r: [thigh_r, True],
+        foot_r: [calf_r, True],
+        toe_r: [foot_r, True],
+        calf_l: [thigh_l, True],
+        foot_l: [calf_l, True],
+        toe_l: [foot_l, True],
+
+        clav_r: [last_spine, False],
+        uparm_r: [clav_r, False],
+        lowarm_r: [uparm_r, True],
+        hand_r: [lowarm_r, True],
+        clav_l: [last_spine, False],
+        uparm_l: [clav_l, False],
+        lowarm_l: [uparm_l, True],
+        hand_l: [lowarm_l, True],
+
+        # fingers
+        palm_pinky_r: [hand_r, False],
+        pinky_01_r: [palm_pinky_r, False],
+        pinky_02_r: [pinky_01_r, True],
+        pinky_03_r: [pinky_02_r, True],
+
+        palm_ring_r: [hand_r, False],
+        ring_01_r: [palm_ring_r, False],
+        ring_02_r: [ring_01_r, True],
+        ring_03_r: [ring_02_r, True],
+
+        palm_middle_r: [hand_r, False],
+        middle_01_r: [palm_middle_r, False],
+        middle_02_r: [middle_01_r, True],
+        middle_03_r: [middle_02_r, True],
+
+        palm_index_r: [hand_r, False],
+        index_01_r: [palm_index_r, False],
+        index_02_r: [index_01_r, True],
+        index_03_r: [index_02_r, True],
+
+        thumb_01_r: [hand_r, False],
+        thumb_02_r: [thumb_01_r, True],
+        thumb_03_r: [thumb_02_r, True],
+
+        # left fingers
+        palm_pinky_l: [hand_l, False],
+        pinky_01_l: [palm_pinky_l, False],
+        pinky_02_l: [pinky_01_l, True],
+        pinky_03_l: [pinky_02_l, True],
+
+        palm_ring_l: [hand_l, False],
+        ring_01_l: [palm_ring_l, False],
+        ring_02_l: [ring_01_l, True],
+        ring_03_l: [ring_02_l, True],
+
+        palm_middle_l: [hand_l, False],
+        middle_01_l: [palm_middle_l, False],
+        middle_02_l: [middle_01_l, True],
+        middle_03_l: [middle_02_l, True],
+
+        palm_index_l: [hand_l, False],
+        index_01_l: [palm_index_l, False],
+        index_02_l: [index_01_l, True],
+        index_03_l: [index_02_l, True],
+
+        thumb_01_l: [hand_l, False],
+        thumb_02_l: [thumb_01_l, True],
+        thumb_03_l: [thumb_02_l, True],
+    }
+
+    # add spine parenting to parenting_bones dict
+    parenting_bones.update(spine_parenting)
+    parenting_bones.update(neck_parenting)
+
+    # if no palms, paretn 1st finger bone to hand r/l
+    palm_correct = {
+        pinky_01_r: hand_r,
+        ring_01_r: hand_r,
+        middle_01_r: hand_r,
+        index_01_r: hand_r,
+        pinky_01_l: hand_l,
+        ring_01_l: hand_l,
+        middle_01_l: hand_l,
+        index_01_l: hand_l,
+    }
+    for f, palm in palm_correct.items():
+        if parenting_bones[f][0] == '':
+            parenting_bones[f][0] = palm
+
+    # switching hip head with tail if hip head is the same as spine head
+    first_spine_bone = METARIG_OBJ.data.edit_bones[first_spine]
+    second_spine_bone = METARIG_OBJ.data.edit_bones[second_spine]
+    second_spine_bone_head_copy = second_spine_bone.head.copy()
+    hip_spine_bool = False
+    if first_spine_bone.head == second_spine_bone.head and len(all_spines) > 1:
+        hip_spine_bool = True
+        first_spine_bone_tail = first_spine_bone.tail.copy()
+        first_spine_bone_head = first_spine_bone.head.copy()
+        first_spine_bone.head = first_spine_bone_tail
+        first_spine_bone.tail = first_spine_bone_head
+
+    exclude_align = {
+        # parent: correct child
+        first_spine: second_spine,
+        # spine_003: spine_004,
+        last_spine: first_neck,
+        palm_index_l: index_01_l,
+        palm_index_r: index_01_r,
+        # index_01_r: index_02_r,
+        hand_l: None,
+        hand_r: None,
+        head: None,
+    }
+
+    # copy head.head location to further reapply it if head offsets during connect
+    head_bone = METARIG_OBJ.data.edit_bones[head]
+    head_bone_head = head_bone.head.copy()
+
+    if less_spine_bones == True:
+        exclude_align[first_spine] = None
+
+    all_matarig_bone_names = get_all_bone_names(METARIG_OBJ)
+    for child, parent in parenting_bones.items():
+        if parent[0] != "" and child != "":
+            parent_bone = METARIG_OBJ.data.edit_bones[parent[0]]
+            child_bone = METARIG_OBJ.data.edit_bones[child]
+
+            child_bone.parent = parent_bone
+
+            # parent bone.tail to child.head
+            if parent[0] in exclude_align.keys():
+                if exclude_align[parent[0]] != None:
+                    if exclude_align[parent[0]] in all_matarig_bone_names:
+                        parent_bone.tail = METARIG_OBJ.data.edit_bones[exclude_align[parent[0]]].head
+            else:
+                parent_bone.tail = child_bone.head
+
+            # connect
+            child_bone.use_connect = parent[1]
+
+    if hip_spine_bool == True and less_spine_bones == True:
+        second_spine_bone.head = second_spine_bone_head_copy
+
+    # hip tail to 2nd spine head if there are 2 spine bones
+    if hip_spine_bool == False and less_spine_bones == True:
+        if len(all_spines) == 2:
+            first_spine_bone.tail = second_spine_bone_head_copy
+
+    # # reapply head location in case it offsets during connect
+    # head_bone = METARIG_OBJ.data.edit_bones[head]
+    # head_bone.head = head_bone_head
+
+    # ===============================================================
+    # add additional bones
+    all_skeleton_pose_bones = get_all_bone_names(EXTERNAL_RIG_OBJ)
+
+    # add new created bones to parameters to further get extra bones
+    new_bones = [
+        'heel_l',
+        'heel_r',
+        'new_torso',
+        "skeleton:TransformationTarget",
+        "skeleton:torso_bone",
+    ]
+
+    for i in new_bones:
+        f"new_{i}" == i
+
+    # store these bones
+#    extra_bones = [
+#        bone for bone in all_skeleton_pose_bones if bone not in values()]
+
+#    for bone in extra_bones:
+#        ext_rig_bone = EXTERNAL_RIG_OBJ.data.edit_bones[bone]
+#        meta_bone = METARIG_OBJ.data.edit_bones[bone]
+#        if ext_rig_bone.parent is not None:
+#            if ext_rig_bone.parent.name in all_matarig_bone_names:
+#                new_parent = METARIG_OBJ.data.edit_bones[ext_rig_bone.parent.name]
+#                meta_bone.parent = new_parent
+
+    # ===============================================================
+    # places hands at an avarage distance of its child head
+    hand_L = METARIG_OBJ.data.edit_bones[hand_l]
+    hand_R = METARIG_OBJ.data.edit_bones[hand_r]
+    hand_L_children = hand_L.children
+    hand_R_children = hand_R.children
+
+    hand_child_names = [i.name for i in (hand_L_children + hand_R_children)]
+    bone_head_tail_loc = {}
+    bone_head_tail_loc = get_bone_location(hand_child_names, METARIG_OBJ)
+
+    # removes thumbs from heand.children list
+    hand_L_children = [f for f in hand_L_children if thumb_01_l != f.name]
+    hand_R_children = [f for f in hand_R_children if thumb_01_r != f.name]
+
+    # if models has no palms, get average point of fingers
+    alternative_children_r = [pinky_01_r, ring_01_r, middle_01_r, index_01_r]
+    alternative_children_l = [pinky_01_l, ring_01_l, middle_01_l, index_01_l]
+    if len(hand_R_children) == 0:
+        hand_R_children = [METARIG_OBJ.data.edit_bones[f]
+                           for f in alternative_children_r if f != ""]
+    if len(hand_L_children) == 0:
+        hand_L_children = [METARIG_OBJ.data.edit_bones[f]
+                           for f in alternative_children_l if f != ""]
+
+    if (len(hand_L_children) < 4) or (len(hand_R_children) < 4):
+        finger_child_vectors_L = [fc.head for fc in hand_L_children]
+        finger_child_vectors_R = [fc.head for fc in hand_R_children]
+        if fingers_bool_l == True:
+            median_point_l = sum(finger_child_vectors_L, Vector()) / len(
+                finger_child_vectors_L
+            )
+            hand_L.tail = median_point_l
+
+        if fingers_bool_r == True:
+            median_point_r = sum(finger_child_vectors_R, Vector()) / len(
+                finger_child_vectors_R
+            )
+            hand_R.tail = median_point_r
+
+        bone_head_tail_loc = {}
+        bone_head_tail_loc[hand_R] = [hand_R.head, hand_R.tail]
+        bone_head_tail_loc[hand_L] = [hand_L.head, hand_L.tail]
+    else:
+        x_avg, y_avg, z_avg = get_avarage(hand_L_children)
+        hand_L.tail = (x_avg, y_avg, z_avg)
+
+        x_avg, y_avg, z_avg = get_avarage(hand_R_children)
+        hand_R.tail = (x_avg, y_avg, z_avg)
+
+    # ===============================================================
+    # fix hands orientation if there are no fingers
+    hands_orient = {
+        # hand = [parent rot, finger check]
+        hand_r: [lowarm_r, fingers_bool_r],
+        hand_l: [lowarm_l, fingers_bool_l],
+    }
+
+    for key, value in hands_orient.items():
+        if value[1] == False:
+            hand = METARIG_OBJ.data.edit_bones[key]
+            upper_arm_bone = METARIG_OBJ.data.edit_bones[value[0]]
+
+            # quatRot1, quatRot2 = get_rotation_diff(
+            #     hand, METARIG_OBJ, upper_arm_bone, METARIG_OBJ)
+            # rot_diff_quat = quatRot2.rotation_difference(quatRot1)
+            # rot_diff_euler = rot_diff_quat.to_euler()
+
+            arm_len = upper_arm_bone.length
+            # arm_len = upper_arm_bone.length.copy()
+            # lengthen forearm
+            upper_arm_bone.length *= 1.5
+            # palce hand tail @ lengthen forearm tail
+            hand.tail = upper_arm_bone.tail
+            # restore forearm original length
+            upper_arm_bone.length = arm_len
+
+    # ===============================================================
+    # fixing last fingers bone
+    last_fingers_bone = [
+        pinky_03_r,
+        ring_03_r,
+        middle_03_r,
+        index_03_r,
+        thumb_03_r,
+        pinky_03_l,
+        ring_03_l,
+        middle_03_l,
+        index_03_l,
+        thumb_03_l,
+    ]
+
+    for f in last_fingers_bone:
+        if f != "":
+            finger_bone = METARIG_OBJ.data.edit_bones[f]
+            finger_bone_original = EXTERNAL_RIG_OBJ.data.edit_bones[f]
+            if len(finger_bone.children) == 0:
+                # check if there is children in original model
+                if len(finger_bone_original.children) == 0:
+                    for c in EXTERNAL_RIG_OBJ.children:
+                        verts_names = [i.name for i in c.vertex_groups]
+                        if f in verts_names:
+                            finger_vert_vector = []
+
+                            # get vertices
+                            finger_vertex_g = c.vertex_groups[f]
+                            finger_verts = [
+                                vert
+                                for vert in c.data.vertices
+                                if finger_vertex_g.index in [i.group for i in vert.groups]
+                            ]
+                            # get location
+                            for i in finger_verts:
+                                co_final = c.matrix_world @ i.co
+                                finger_vert_vector.append(co_final)
+
+                            finger_median_point = sum(finger_vert_vector, Vector()) / len(
+                                finger_vert_vector
+                            )
+                            finger_bone.tail = finger_median_point
+                            break
+                            # else:
+                            # print("no verts")
+                            #     print(finger_vert_vector)
+                            #     print(finger_vertex_g)
+
+    # ===============================================================
+    # fix fingers orientation
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+
+    all_fingers_but_thumbs = (right_fingers + left_fingers)
+
+    # remove thumbs as they usually don't need axis change
+    thumbs = [
+        thumb_01_r,
+        thumb_02_r,
+        thumb_03_r,
+        thumb_01_l,
+        thumb_02_l,
+        thumb_03_l,
+    ]
+
+    # remove duplicates, empty variables
+    all_fingers_but_thumbs = list(dict.fromkeys(all_fingers_but_thumbs))
+    if '' in all_fingers_but_thumbs:
+        all_fingers_but_thumbs.remove('')
+
+    for t in thumbs:
+        if t in all_fingers_but_thumbs:
+            all_fingers_but_thumbs.remove(t)
+
+    METARIG_OBJ.data.show_axes = True
+
+    # make z axis point in bend direction
+    for f in all_fingers_but_thumbs:
+        if f in all_metarig_bone_names:
+            finger_bone = METARIG_OBJ.data.edit_bones[f]
+            # finger_bone.align_roll(-finger_bone.z_axis) # works w/ mixamo & fortnite
+            # ===============================================================
+            roll = finger_bone.tail.copy()
+            roll[2] -= 1
+            finger_bone.align_roll(-roll)
+
+    # rotation axis to 'X Manual'
+    bpy.ops.object.mode_set(mode="POSE")
+    for f in all_fingers_but_thumbs:
+        pose_bone = METARIG_OBJ.pose.bones[f]
+        # pose_bone.rigify_parameters.rotation_axis = "x"
+        pose_bone.rigify_parameters.primary_rotation_axis = 'X'
+
+    # ===============================================================
+
+    # assign rig type to bones
+    all_ext_rig_bone_names = get_all_bone_names(EXTERNAL_RIG_OBJ)
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+
+    rigifyType = {
+        # head: "spines.super_head",
+        first_neck: "spines.super_head",
+        clav_l: "basic.super_copy",
+        clav_r: "basic.super_copy",
+        uparm_r: "limbs.super_limb",
+        uparm_l: "limbs.super_limb",
+        # fingers
+        palm_index_r: "limbs.super_palm",
+        pinky_01_r: "limbs.super_finger",
+        ring_01_r: "limbs.super_finger",
+        middle_01_r: "limbs.super_finger",
+        index_01_r: "limbs.super_finger",
+        thumb_01_r: "limbs.super_finger",
+        # left fnigers
+        palm_index_l: "limbs.super_palm",
+        pinky_01_l: "limbs.super_finger",
+        ring_01_l: "limbs.super_finger",
+        middle_01_l: "limbs.super_finger",
+        index_01_l: "limbs.super_finger",
+        thumb_01_l: "limbs.super_finger",
+
+        first_spine: "spines.basic_spine",
+        thigh_l: "limbs.leg",
+        thigh_r: "limbs.leg",
+    }
+
+    # change rigify type for spine if there's only one spine
+    if less_spine_bones == True:
+        for s in all_spines:
+            rigifyType[s] = "basic.super_copy"
+        rigifyType[first_neck] = "basic.super_copy"
+        rigifyType[head] = "basic.super_copy"
+
+    bpy.ops.object.mode_set(mode="POSE")
+    for bone, rig_type in rigifyType.items():
+        if bone in all_metarig_bone_names:
+            pose_bone = METARIG_OBJ.pose.bones[bone]
+            pose_bone.rigify_type = rig_type
+            rigify_param = pose_bone.rigify_parameters
+
+            if bone == thigh_r or bone == thigh_l:
+                rigify_param.extra_ik_toe = True
+            #     rigify_param.limb_type = "leg"
+
+            # if bone == pelvis:
+                # rigify_param['make_control'] = 0
+
+            if bone == last_neck:
+                rigify_param.connect_chain = True
+
+            if bone == clav_r or bone == clav_l:
+                rigify_param.super_copy_widget_type = "shoulder"
+
+    # ===============================================================
+    # adding bones to respective layer
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+
+    layer_bones = {
+        head: 0,
+        uparm_l: 7,
+        lowarm_l: 7,
+        uparm_r: 10,
+        lowarm_r: 10,
+        hand_l: 7,
+        hand_r: 10,
+        thigh_l: 13,
+        calf_l: 13,
+        foot_l: 13,
+        toe_l: 13,
+        heel_l: 13,
+        thigh_r: 16,
+        calf_r: 16,
+        foot_r: 16,
+        toe_r: 16,
+        heel_r: 16,
+    }
+
+    # adding bones to layer
+    bpy.ops.object.mode_set(mode="POSE")
+    for i in layer_bones:
+        if bone in all_metarig_bone_names:
+            context_bone = bpy.context.object.data.bones[i]
+            context_bone.layers[0] = True
+            # disable all the other layers but layer[0]
+            for cnt in range(1, 32):
+                context_bone.layers[cnt] = False
+
+    layer_bones[clav_r] = 3
+    layer_bones[clav_l] = 3
+    layer_bones["skeleton:torso_bone"] = 3
+    layer_bones["new_torso"] = 3
+    layer_bones[first_neck] = 3
+
+    # add spines and necks to layer 3
+    for s in (all_spines + all_necks):
+        layer_bones[s] = 3
+
+    finger_bones = [
+        palm_pinky_r,
+        pinky_01_r,
+        pinky_02_r,
+        pinky_03_r,
+        palm_ring_r,
+        ring_01_r,
+        ring_02_r,
+        ring_03_r,
+        palm_middle_r,
+        middle_01_r,
+        middle_02_r,
+        middle_03_r,
+        palm_index_r,
+        index_01_r,
+        index_02_r,
+        index_03_r,
+        thumb_01_r,
+        thumb_02_r,
+        thumb_03_r,
+        palm_pinky_l,
+        pinky_01_l,
+        pinky_02_l,
+        pinky_03_l,
+        palm_ring_l,
+        ring_01_l,
+        ring_02_l,
+        ring_03_l,
+        palm_middle_l,
+        middle_01_l,
+        middle_02_l,
+        middle_03_l,
+        palm_index_l,
+        index_01_l,
+        index_02_l,
+        index_03_l,
+        thumb_01_l,
+        thumb_02_l,
+        thumb_03_l,
+    ]
+
+    for bone in finger_bones:
+        layer_bones[bone] = 5
+
+    # spine and neck to torso layer if there's only one spine
+    if less_spine_bones == True:
+        layer_bones[first_spine] = 3
+        layer_bones[first_neck] = 3
+        layer_bones[head] = 3
+
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+    for i, layer in layer_bones.items():
+        if i in all_metarig_bone_names:
+            context_bone = bpy.context.object.data.bones[i]
+            context_bone.layers[layer] = True
+
+            # disable all the other layers but the correct layer
+            for cnt in range(0, 32):
+                if cnt != layer:
+                    context_bone.layers[cnt] = False
+
+    # ===============================================================
+    # add bones like dyn, clothes bones etc
+    all_skeleton_pose_bones = get_all_bone_names(EXTERNAL_RIG_OBJ, "POSE")
+
+#    for bone in extra_bones:
+#        pose_bone = METARIG_OBJ.pose.bones[bone]
+#        pose_bone.rigify_type = "basic.super_copy"
+
+    # add extra bones to its layer
+#    if len(extra_bones) != 0:
+#        METARIG_OBJ.data.rigify_layers[27].name = "Additional"
+#        bpy.context.object.data.rigify_layers[27].group = 3
+#        bpy.context.object.data.layers[27] = True
+#        for bone in extra_bones:
+#            context_bone = bpy.context.object.data.bones[bone]
+#            # disable all the other layers but the correct layer
+#            context_bone.layers[27] = True
+#            for cnt in range(0, 32):
+#                if cnt != 27:
+#                    context_bone.layers[cnt] = False
+
+    # ===============================================================
+    # fixing new_torso orinetation
+    bpy.ops.object.mode_set(mode="EDIT")
+    new_torso_bone = METARIG_OBJ.data.edit_bones["new_torso"]
+    spine_bone = METARIG_OBJ.data.edit_bones[second_spine]
+    if first_spine == "":
+        first_spine_bone = spine_bone.children[0]
+    else:
+        first_spine_bone = METARIG_OBJ.data.edit_bones[first_spine]
+
+    new_torso_bone.tail = (first_spine_bone.head + first_spine_bone.tail) / 2
+    new_torso_bone.head = (spine_bone.head + spine_bone.tail) / 2
+
+    # ===============================================================
+    # this would be an option
+    # get FT height. This is to move upper_arm.R/L, thigh.L/R
+    all_z = []
+    for corner in EXTERNAL_RIG_OBJ.bound_box:
+        corner_vector = EXTERNAL_RIG_OBJ.matrix_world @ Vector(corner)
+        all_z.append(corner_vector[2])
+
+    skeleton_height = max(all_z) - min(all_z)
+    skeleton_height_percent = skeleton_height * 0.002
+
+    changeHeadPos = {
+        uparm_l: skeleton_height_percent,
+        uparm_r: skeleton_height_percent,
+        thigh_l: -skeleton_height_percent,
+        thigh_r: -skeleton_height_percent,
+    }
+
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+    for key, value in changeHeadPos.items():
+        if key in all_metarig_bone_names:
+            METARIG_OBJ.data.edit_bones[key].tail.y += value
+
+    # switching hip head with tail if hip head is the same as spine head
+    first_spine_bone = METARIG_OBJ.data.edit_bones[first_spine]
+    second_spine_bone = METARIG_OBJ.data.edit_bones[second_spine]
+    if hip_spine_bool == True:
+        first_spine_bone.head = first_spine_bone.tail
+        first_spine_bone.head[2] -= skeleton_height_percent
+
+    bpy.ops.object.mode_set(mode="POSE")
+
+    # # ===============================================================
+    # assign fk_layers
+    fk_layer = {
+        # bone : [fk, tweak]
+        thigh_l: [14, 15],
+        thigh_r: [17, 18],
+        uparm_r: [11, 12],
+        uparm_l: [8, 9],
+        first_spine: [4, 4],
+        first_neck: [None, 1],
+    }
+
+    fingers_tweak = [
+        x for x in finger_bones if x in all_metarig_bone_names]
+
+    for i in fingers_tweak:
+        fk_layer[i] = [None, 6]
+
+    cnt = 0
+    all_metarig_bone_names = get_all_bone_names(METARIG_OBJ)
+    bpy.ops.object.mode_set(mode="POSE")
+    for bone, layer in fk_layer.items():
+        if bone in all_metarig_bone_names:
+            pose_bone = METARIG_OBJ.pose.bones[bone]
+            rigify_param = pose_bone.rigify_parameters
+
+            fk_layer = layer[0]
+            tweak_layer = layer[1]
+
+            # if bones has fk layer
+            if layer[0] != None:
+                # disable all layers
+                for cnt in range(0, 32):
+                    rigify_param.fk_layers[cnt] = False
+                rigify_param.fk_layers[fk_layer] = True
+
+            # if bones doesn't have fk layer
+            if layer[1] != None:
+                # disable all layers
+                for cnt in range(0, 32):
+                    rigify_param.tweak_layers[cnt] = False
+                rigify_param.tweak_layers[tweak_layer] = True
+
+    # remove rigify type on the root bone
+    if "root" in all_metarig_bone_names:
+        pose_bone = METARIG_OBJ.pose.bones["root"]
+        pose_bone.rigify_type = ""
+
+    # ===============================================================
+    print("\t Generating Rig")
+    cnt = bpy.context
+    rigify.generate.generate_rig(cnt, METARIG_OBJ)
+
+    # renaming rigify
+    rig = bpy.context.active_object
+    rig.select_set(True)
+    rig.name = EXTERNAL_RIG_NAME + RIGIFY_NAME
+    RIGIFY_NAME = rig.name
+    RIGIFY_OBJ = bpy.data.objects[RIGIFY_NAME]
+    RIGIFY_OBJ.show_in_front = True
+
+    # [!!!] DON'T delete layer 31
+    layers = [0, 3, 6, 8, 11, 14, 17, 31]
+    # layers = [29, 31]
+    for nr in range(0, 32):
+        if nr in layers:
+            RIGIFY_OBJ.data.layers[nr] = True
+        else:
+            RIGIFY_OBJ.data.layers[nr] = False
+
+    # ===============================================================
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.select_all(action="DESELECT")
+    # METARIG_OBJ.select_set(False)
+    EXTERNAL_RIG_OBJ.select_set(True)
+    RIGIFY_OBJ.select_set(True)
+
+    bpy.ops.object.mode_set(mode="POSE")
+    EXTERNAL_RIG_OBJ.data.pose_position = "REST"
+    RIGIFY_OBJ.data.pose_position = "POSE"
+
+    # ===============================================================
+    # set inherit scale to None for every bone on additional layer
+    all_rigify_bone_names = get_all_bone_names(RIGIFY_OBJ, "POSE")
+
+    # ===============================================================
+    ik_fk = [
+        "upperarm_parent_r",
+        "thigh_parent_r",
+        "upperarm_parent_l",
+        "thigh_parent_l",
+    ]
+
+    all_rigify_bone_names = get_all_bone_names(RIGIFY_OBJ, "POSE")
+    for i in ik_fk:
+        # in case model doesn't have thighs
+        if i in all_rigify_bone_names:
+            p_bone = RIGIFY_OBJ.pose.bones[i]
+            RIGIFY_OBJ.pose.bones[i]["IK_FK"] = 0
+
+    # ===============================================================
+    CONSTRAINTS_MAP = {
+        # FT    : rigify
+        "skeleton:torso_bone": ["torso", True],
+        head: [head, False],
+        first_neck: [first_neck, True],
+        first_spine: [first_spine, True],
+        second_spine: [second_spine, True],
+        last_spine: [last_spine, True],
+        # spine_001: [spine_001, True],
+        # spine_002: [spine_002, True],
+        # spine_003: [spine_003, True],
+        # spine_004: [spine_004, True],
+        clav_r: [clav_r, True],
+        clav_l: [clav_l, True],
+        uparm_r: [uparm_r, False],
+        lowarm_r: [lowarm_r, False],
+        hand_r: [hand_r, False],
+        uparm_l: [uparm_l, False],
+        lowarm_l: [lowarm_l, False],
+        hand_l: [hand_l, False],
+        # fingers
+        palm_pinky_r: [palm_pinky_r, False],
+        pinky_01_r: [pinky_01_r, False],
+        pinky_02_r: [pinky_02_r, False],
+        pinky_03_r: [pinky_03_r, False],
+        palm_ring_r: [palm_ring_r, False],
+        ring_01_r: [ring_01_r, False],
+        ring_02_r: [ring_02_r, False],
+        ring_03_r: [ring_03_r, False],
+        palm_middle_r: [palm_middle_r, False],
+        middle_01_r: [middle_01_r, False],
+        middle_02_r: [middle_02_r, False],
+        middle_03_r: [middle_03_r, False],
+        palm_index_r: [palm_index_r, False],
+        index_01_r: [index_01_r, False],
+        index_02_r: [index_02_r, False],
+        index_03_r: [index_03_r, False],
+        thumb_01_r: [thumb_01_r, False],
+        thumb_02_r: [thumb_02_r, False],
+        thumb_03_r: [thumb_03_r, False],
+        palm_pinky_l: [palm_pinky_l, False],
+        pinky_01_l: [pinky_01_l, False],
+        pinky_02_l: [pinky_02_l, False],
+        pinky_03_l: [pinky_03_l, False],
+        palm_ring_l: [palm_ring_l, False],
+        ring_01_l: [ring_01_l, False],
+        ring_02_l: [ring_02_l, False],
+        ring_03_l: [ring_03_l, False],
+        palm_middle_l: [palm_middle_l, False],
+        middle_01_l: [middle_01_l, False],
+        middle_02_l: [middle_02_l, False],
+        middle_03_l: [middle_03_l, False],
+        palm_index_l: [palm_index_l, False],
+        index_01_l: [index_01_l, False],
+        index_02_l: [index_02_l, False],
+        index_03_l: [index_03_l, False],
+        thumb_01_l: [thumb_01_l, False],
+        thumb_02_l: [thumb_02_l, False],
+        thumb_03_l: [thumb_03_l, False],
+
+        thigh_r: [thigh_r, True],
+        calf_r: [calf_r, False],
+        foot_r: [foot_r, False],
+        toe_r: [toe_r, False],
+        thigh_l: [thigh_l, True],
+        calf_l: [calf_l, False],
+        foot_l: [foot_l, False],
+        toe_l: [toe_l, False],
+    }
+
+    # don't generate torso if there are less than 2 spine bones
+    if less_spine_bones == True:
+        del CONSTRAINTS_MAP["skeleton:torso_bone"]
+
+    # add spines to dict
+    for s in all_spines:
+        CONSTRAINTS_MAP[s] = [s, True]
+
+    # add necks to dict
+    for n in all_necks:
+        CONSTRAINTS_MAP[n] = [n, True]
+
+    EXTERNAL_RIG_OBJ.data.pose_position = "REST"
+    RIGIFY_OBJ.data.pose_position = "REST"
+
+    bpy.ops.pose.select_all(action="DESELECT")
+
+    # # ===============================================================
+    # copy constraint from rigify to FT
+    exclude_def_naming = [
+        "torso",
+        "neck",
+        "chest",
+    ]
+
+    all_skeleton_pose_bones = get_all_bone_names(EXTERNAL_RIG_OBJ, "POSE")
+    for key, value in CONSTRAINTS_MAP.items():
+        # print(f"key   \t: {key}  , {key in all_skeleton_pose_bones} ")
+        if key in all_skeleton_pose_bones:
+            # changes names of bones
+            if "chest" in value[0]:
+                value[0] = "chest"
+
+            if value[0] not in exclude_def_naming:
+                value[0] = "DEF-" + value[0]
+
+            if "skeleton:torso_bone" in value[0].lower():
+                value[0] = "torso"
+
+            # print(f"\t value : {value} ")
+            # print(f"\t key   : {key} ")
+            # print(f"===================================\n\n")
+
+            bone1 = EXTERNAL_RIG_OBJ.pose.bones[key]
+            bone2 = RIGIFY_OBJ.pose.bones[value[0]]
+
+            quatRot1, quatRot2 = get_rotation_diff(
+                # key, EXTERNAL_RIG_OBJ, value[0], RIGIFY_OBJ
+                bone1, EXTERNAL_RIG_OBJ, bone2, RIGIFY_OBJ
+            )
+            rot_diff_quat = quatRot2.rotation_difference(quatRot1)
+            rot_diff_euler = rot_diff_quat.to_euler()
+
+            copy_loc = value[1]
+            # value = RIGIFY_OBJ.pose.bones[value[0]]
+            key = EXTERNAL_RIG_OBJ.pose.bones[key]
+
+            create_constraint(
+                key,
+                EXTERNAL_RIG_OBJ,
+                value[0],
+                RIGIFY_OBJ,
+                rot_diff_euler,
+                rot_diff_euler.order,
+                copy_loc,
+                copy_loc_constr,
+            )
+    # ===============================================================
+    # add constraints to additional bones
+#    for bone in extra_bones:
+#        if bone in all_skeleton_pose_bones:
+#            bone1 = EXTERNAL_RIG_OBJ.pose.bones[bone]
+#            bone2 = RIGIFY_OBJ.pose.bones[bone]
+#            quatRot1, quatRot2 = get_rotation_diff(
+#                bone1,
+#                EXTERNAL_RIG_OBJ,
+#                bone2,
+#                RIGIFY_OBJ,
+#            )
+#            rot_diff_quat = quatRot2.rotation_difference(quatRot1)
+#            rot_diff_euler = rot_diff_quat.to_euler()
+
+#            bone = EXTERNAL_RIG_OBJ.pose.bones[bone]
+
+#            create_constraint(
+#                bone,
+#                EXTERNAL_RIG_OBJ,
+#                bone.name,
+#                RIGIFY_OBJ,
+#                rot_diff_euler,
+#                rot_diff_euler.order,
+#                True,
+#            )
+
+    # ===============================================================
+    # custom shape scale
+    custom_shape_scale = {
+        "head": 1.5,
+    }
+
+    for k, v in custom_shape_scale.items():
+        if value in all_ext_rig_bone_names:
+            pose_bone = RIGIFY_OBJ.pose.bones[k]
+            pose_bone.custom_shape_scale_xyz = (v, v, v)
+
+    # # ===============================================================
+    layers = [0, 3, 6, 8, 11, 14, 17, 27, 13, 16, 7, 10, 5]
+    # layers = [29, 31]
+    for nr in range(0, 32):
+        if nr in layers:
+            RIGIFY_OBJ.data.layers[nr] = True
+        else:
+            RIGIFY_OBJ.data.layers[nr] = False
+    # # ===============================================================
+
+    RIGIFY_OBJ.data.pose_position = "POSE"
+    EXTERNAL_RIG_OBJ.data.pose_position = "POSE"
+
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.select_all(action="DESELECT")
+    METARIG_OBJ.hide_set(True)
+    # EXTERNAL_RIG_OBJ.hide_set(True)
+    EXTERNAL_RIG_OBJ.select_set(True)
+    bpy.ops.object.mode_set(mode="POSE")
+
+# #     # # ===============================================================
+
+# #     delete_garbage()
+
+# # # # ===============================================================
+# # delete or comment this line when released
+params = ['head', 'neck_01', 'pelvis', 'spine_01', 'spine_02', 'spine_03', 'spine_04', 'spine_05', 'neck_01', 'clavicle_r', 'clavicle_l', 'upperarm_l', 'upperarm_r', 'lowerarm_l', 'lowerarm_r', 'hand_l', 'hand_r', 'pinky_metacarpal_r', 'pinky_01_r', 'pinky_02_r', 'pinky_03_r', 'ring_metacarpal_r', 'ring_01_r', 'ring_02_r', 'ring_03_r', 'middle_metacarpal_r', 'middle_01_r', 'middle_02_r', 'middle_03_r', 'index_metacarpal_r', 'index_01_r', 'index_02_r', 'index_03_r', 'thumb_01_r', 'thumb_01_r', 'thumb_02_r', 'thumb_03_r', 'pinky_metacarpal_l', 'pinky_01_l', 'pinky_02_l', 'pinky_03_l', 'ring_metacarpal_l', 'ring_01_l', 'ring_02_l', 'ring_03_l', 'middle_metacarpal_l', 'middle_01_l', 'middle_02_l', 'middle_03_l', 'index_metacarpal_l', 'index_01_l', 'index_02_l', 'index_03_l', 'thumb_01_l', 'thumb_01_l', 'thumb_02_l', 'thumb_03_l', 'thigh_l', 'thigh_r', 'calf_l', 'calf_r', 'foot_l', 'foot_r', 'ball_l', 'ball_r', '', '']
+
+bpy.ops.object.mode_set(mode="OBJECT")
+skeleton_model = bpy.context.active_object
+
+if "Copy Rotation" in bpy.context.object.pose.bones["cf_j_hips"].constraints:
+    if bpy.context.object.pose.bones["cf_j_hips"].constraints["Copy Rotation"].enabled is True:
+        toggle_rigi = False
+    else:
+        toggle_rigi = True
+
+    for g_bone in bpy.context.object.pose.bones:
+        for cstr in bpy.context.object.pose.bones[g_bone.name].constraints:
+            if "Copy Location" in cstr.name:
+                bpy.context.object.pose.bones[g_bone.name].constraints[cstr.name].enabled = toggle_rigi
+            if "Copy Rotation" in cstr.name:
+                bpy.context.object.pose.bones[g_bone.name].constraints[cstr.name].enabled = toggle_rigi
+            if "Transformation" in cstr.name:
+                bpy.context.object.pose.bones[g_bone.name].constraints[cstr.name].enabled = toggle_rigi
+else:
+    the_script(skeleton_model, params)
+
+    bpy.ops.object.mode_set(mode="OBJECT")
+    bpy.ops.object.select_all(action='DESELECT')
+    bpy.context.view_layer.objects.active = skeleton_model
+
+    bpy.ops.object.mode_set(mode='OBJECT')
+
+    bpy.ops.object.select_all(action='DESELECT')
+
+    arma_2 = bpy.context.view_layer.objects.active
+    arma_name_rig = arma_2.name+'_rigify'
+    arma_rig = bpy.data.objects[arma_name_rig]
+
+    bpy.context.view_layer.objects.active = arma_2
+
+    bpy.ops.object.mode_set(mode='POSE')
+    #CODOS
+    arma_2.pose.bones['cf_s_elboback_L'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_elboback_L'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_elboback_L'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_elboback_L'].constraints['Copy Rotation'].subtarget = 'DEF-forearm01_L'
+    arma_2.pose.bones['cf_s_elboback_L'].constraints['Copy Rotation'].influence = 0.5
+
+    bpy.ops.pose.constraint_add(type='COPY_LOCATION')
+    arma_2.pose.bones['cf_s_elboback_L'].constraints['Copy Location'].target = arma_2
+    arma_2.pose.bones['cf_s_elboback_L'].constraints['Copy Location'].subtarget = 'cf_d_forearm02_L'
+    arma_2.pose.bones['cf_s_elboback_L'].constraints['Copy Location'].influence = 0.75
+
+    bpy.ops.pose.select_all(action='DESELECT')
+
+    arma_2.pose.bones['cf_s_elboback_R'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_elboback_R'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_elboback_R'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_elboback_R'].constraints['Copy Rotation'].subtarget = 'DEF-forearm01_R'
+    arma_2.pose.bones['cf_s_elboback_R'].constraints['Copy Rotation'].influence = 0.5
+
+    bpy.ops.pose.constraint_add(type='COPY_LOCATION')
+    arma_2.pose.bones['cf_s_elboback_R'].constraints['Copy Location'].target = arma_2
+    arma_2.pose.bones['cf_s_elboback_R'].constraints['Copy Location'].subtarget = 'cf_d_forearm02_R'
+    arma_2.pose.bones['cf_s_elboback_R'].constraints['Copy Location'].influence = 0.75
+
+    bpy.ops.pose.select_all(action='DESELECT')
+    #RODILLAS
+    arma_2.pose.bones['cf_s_leg01_L'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_leg01_L'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_leg01_L'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_leg01_L'].constraints['Copy Rotation'].subtarget = 'DEF-leg01_L'
+    arma_2.pose.bones['cf_s_leg01_L'].constraints['Copy Rotation'].influence = 0.1
+
+    bpy.ops.pose.select_all(action='DESELECT')
+
+    arma_2.pose.bones['cf_s_leg01_R'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_leg01_R'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_leg01_R'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_leg01_R'].constraints['Copy Rotation'].subtarget = 'DEF-leg01_R'
+    arma_2.pose.bones['cf_s_leg01_R'].constraints['Copy Rotation'].influence = 0.1
+
+    bpy.ops.pose.select_all(action='DESELECT')
+    #PIERNA
+    arma_2.pose.bones['cf_s_kneeB_L'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_kneeB_L'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints['Copy Rotation'].subtarget = 'DEF-leg01_L'
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints["Copy Rotation"].target_space = 'LOCAL_OWNER_ORIENT'
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints["Copy Rotation"].owner_space = 'LOCAL'
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints['Copy Rotation'].influence = 0.4
+
+    bpy.ops.pose.constraint_add(type='COPY_LOCATION')
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints['Copy Location'].target = arma_2
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints['Copy Location'].subtarget = 'cf_d_leg02_L'
+    arma_2.pose.bones['cf_s_kneeB_L'].constraints['Copy Location'].influence = 0.6
+
+    bpy.ops.pose.select_all(action='DESELECT')
+
+    arma_2.pose.bones['cf_s_kneeB_R'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_kneeB_R'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints['Copy Rotation'].subtarget = 'DEF-leg01_R'
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints["Copy Rotation"].target_space = 'LOCAL_OWNER_ORIENT'
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints["Copy Rotation"].owner_space = 'LOCAL'
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints['Copy Rotation'].influence = 0.4
+
+    bpy.ops.pose.constraint_add(type='COPY_LOCATION')
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints['Copy Location'].target = arma_2
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints['Copy Location'].subtarget = 'cf_d_leg02_R'
+    arma_2.pose.bones['cf_s_kneeB_R'].constraints['Copy Location'].influence = 0.6
+
+    bpy.ops.pose.select_all(action='DESELECT')
+    #WAIST
+    arma_2.pose.bones['cf_s_leg_L'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_leg_L'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_leg_L'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_leg_L'].constraints['Copy Rotation'].subtarget = 'DEF-thigh00_L'
+    arma_2.pose.bones['cf_s_leg_L'].constraints["Copy Rotation"].target_space = 'LOCAL_OWNER_ORIENT'
+    arma_2.pose.bones['cf_s_leg_L'].constraints["Copy Rotation"].owner_space = 'LOCAL'
+
+    bpy.ops.pose.select_all(action='DESELECT')
+
+    arma_2.pose.bones['cf_s_leg_R'].bone.select = True
+    bpy.context.object.data.bones.active = arma_2.pose.bones['cf_s_leg_R'].bone
+
+    bpy.ops.pose.constraint_add(type='COPY_ROTATION')
+    arma_2.pose.bones['cf_s_leg_R'].constraints['Copy Rotation'].target = arma_rig
+    arma_2.pose.bones['cf_s_leg_R'].constraints['Copy Rotation'].subtarget = 'DEF-thigh00_R'
+    arma_2.pose.bones['cf_s_leg_R'].constraints["Copy Rotation"].target_space = 'LOCAL_OWNER_ORIENT'
+    arma_2.pose.bones['cf_s_leg_R'].constraints["Copy Rotation"].owner_space = 'LOCAL'
+
+    bpy.ops.pose.select_all(action='DESELECT')
+
+    bpy.ops.object.mode_set(mode='OBJECT')
