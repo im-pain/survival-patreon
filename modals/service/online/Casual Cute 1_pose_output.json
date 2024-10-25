@@ -1,0 +1,3433 @@
+{
+  "cf_J_Hips": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Head": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 354.5482,
+      "y": 319.4597,
+      "z": 8.311624,
+      "normalized": {
+        "x": 0.742799759,
+        "y": 0.6692872,
+        "z": 0.01741335,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.00000012
+      },
+      "magnitude": 477.3133,
+      "sqrMagnitude": 227827.984
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Neck": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Spine02": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Spine01": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 350.586884,
+      "y": 329.345947,
+      "z": 2.163567E-07,
+      "normalized": {
+        "x": 0.728841,
+        "y": 0.6846829,
+        "z": 4.49787624E-10,
+        "normalized": {
+          "x": 0.728841066,
+          "y": 0.684682965,
+          "z": 4.49787652E-10,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.9999999
+      },
+      "magnitude": 481.019684,
+      "sqrMagnitude": 231379.922
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Kosi01": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_LegUp00_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 2.353861,
+      "y": 350.382568,
+      "z": 359.389618,
+      "normalized": {
+        "x": 0.00468961429,
+        "y": 0.6980697,
+        "z": 0.7160145,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 501.930634,
+      "sqrMagnitude": 251934.375
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_LegLow01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 11.3364725,
+      "y": 2.64126348,
+      "z": 357.622833,
+      "normalized": {
+        "x": 0.03168274,
+        "y": 0.007381703,
+        "z": 0.9994707,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 357.812225,
+      "sqrMagnitude": 128029.586
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Foot01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 1.24532855,
+      "y": 1.34620976,
+      "z": 4.30467749,
+      "normalized": {
+        "x": 0.2661507,
+        "y": 0.287710965,
+        "z": 0.919992566,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.00000012
+      },
+      "magnitude": 4.679035,
+      "sqrMagnitude": 21.8933716
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Toes01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_LegUp00_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 5.403247,
+      "y": 342.346283,
+      "z": 2.92039442,
+      "normalized": {
+        "x": 0.0157804471,
+        "y": 0.9998391,
+        "z": 0.00852915552,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 342.401367,
+      "sqrMagnitude": 117238.7
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_LegLow01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Foot01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 9.001563,
+      "y": 359.3948,
+      "z": 356.136871,
+      "normalized": {
+        "x": 0.0177881531,
+        "y": 0.7102066,
+        "z": 0.703768551,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 506.0426,
+      "sqrMagnitude": 256079.125
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Toes01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Shoulder_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 355.142059,
+      "y": 22.9301224,
+      "z": 356.544281,
+      "normalized": {
+        "x": 0.704980731,
+        "y": 0.04551783,
+        "z": 0.707764268,
+        "normalized": {
+          "x": 0.7049808,
+          "y": 0.045517832,
+          "z": 0.7077643,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 503.761353,
+      "sqrMagnitude": 253775.5
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_ArmUp00_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 27.4977627,
+      "y": 3.8008666,
+      "z": 294.1778,
+      "normalized": {
+        "x": 0.09305989,
+        "y": 0.0128631638,
+        "z": 0.995577455,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.00000012
+      },
+      "magnitude": 295.4846,
+      "sqrMagnitude": 87311.15
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_ArmLow01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 298.943237,
+      "y": 20.0877056,
+      "z": 334.248322,
+      "normalized": {
+        "x": 0.665977061,
+        "y": 0.0447508059,
+        "z": 0.7446287,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 448.879181,
+      "sqrMagnitude": 201492.516
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 26.8411446,
+      "y": 14.4068279,
+      "z": 10.6658735,
+      "normalized": {
+        "x": 0.831603348,
+        "y": 0.446358263,
+        "z": 0.330454469,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 32.27638,
+      "sqrMagnitude": 1041.76465
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Shoulder_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 337.40274,
+      "z": 0.0,
+      "normalized": {
+        "x": 0.0,
+        "y": 1.0,
+        "z": 0.0,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 337.40274,
+      "sqrMagnitude": 113840.609
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_ArmUp00_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 359.7954,
+      "y": 36.2793427,
+      "z": 15.1723347,
+      "normalized": {
+        "x": 0.9940802,
+        "y": 0.100236341,
+        "z": 0.0419197045,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 361.938019,
+      "sqrMagnitude": 130999.125
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_ArmLow01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 7.94757652,
+      "y": 357.8721,
+      "z": 1.42922032,
+      "normalized": {
+        "x": 0.0222022161,
+        "y": 0.999745548,
+        "z": 0.003992646,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 357.9632,
+      "sqrMagnitude": 128137.648
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 349.672577,
+      "y": 311.882446,
+      "z": 13.73387,
+      "normalized": {
+        "x": 0.745962,
+        "y": 0.6653437,
+        "z": 0.02929868,
+        "magnitude": 1.0,
+        "sqrMagnitude": 1.0
+      },
+      "magnitude": 468.753876,
+      "sqrMagnitude": 219730.188
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Thumb01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Thumb02_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Thumb03_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Index01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Index02_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Index03_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Middle01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Middle02_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Middle03_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Ring01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Ring02_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Ring03_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Little01_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Little02_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Little03_R": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Thumb01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Thumb02_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Thumb03_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Index01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Index02_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Index03_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Middle01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Middle02_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Middle03_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Ring01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Ring02_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Ring03_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Little01_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Little02_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "cf_J_Hand_Little03_L": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_326": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_327": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_328": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_329": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_330": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_331": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_332": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_333": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_334": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_335": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_336": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_337": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_1001": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_1002": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_1003": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_1004": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  },
+  "Bone_1005": {
+    "onChangePos": null,
+    "onChangePosAfter": null,
+    "onChangeRot": null,
+    "onChangeScale": null,
+    "pos": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "rot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    },
+    "scale": {
+      "x": 1.0,
+      "y": 1.0,
+      "z": 1.0,
+      "normalized": {
+        "x": 0.577350259,
+        "y": 0.577350259,
+        "z": 0.577350259,
+        "normalized": {
+          "x": 0.5773503,
+          "y": 0.5773503,
+          "z": 0.5773503,
+          "magnitude": 1.0,
+          "sqrMagnitude": 1.00000012
+        },
+        "magnitude": 0.99999994,
+        "sqrMagnitude": 0.99999994
+      },
+      "magnitude": 1.73205078,
+      "sqrMagnitude": 3.0
+    },
+    "defRot": {
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.0,
+      "magnitude": 0.0,
+      "sqrMagnitude": 0.0
+    }
+  }
+}
